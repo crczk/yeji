@@ -1,6 +1,6 @@
-# 业绩助手 - Gitee 云存储网页 APP v2
+# 业绩助手 -   云存储网页 APP v2
 
-这是一个可以部署成网址使用的手机网页 APP / PWA。数据保存在 Gitee 私有仓库的 JSON 文件中。
+这是一个可以部署成网址使用的手机网页 APP / PWA。数据保存在   私有仓库的 JSON 文件中。
 
 ## v2 主要变化
 
@@ -9,12 +9,12 @@
 - 月报改为“月统计”：展示不同业绩类型的月度统计图。
 - 新增“单项业绩每日趋势图”：可选择某个业绩类型查看每天变化。
 - 新增“成员管理”：可以为多名成员记录业绩，并按成员筛选首页、日报、月统计。
-- 保留 Gitee 拉取/上传、业绩类型管理、导出 JSON、导出 CSV、清空记录等功能。
+- 保留   拉取/上传、业绩类型管理、导出 JSON、导出 CSV、清空记录等功能。
 
 ## 文件结构
 
 ```text
-gitee-performance-webapp/
+ -performance-webapp/
 ├── index.html
 ├── styles.css
 ├── app.js
@@ -27,7 +27,7 @@ gitee-performance-webapp/
 
 ## 部署方式
 
-把以下文件上传到 Gitee Pages、宝塔网站目录、Nginx 静态站点或任意静态网站空间：
+把以下文件上传到   Pages、宝塔网站目录、Nginx 静态站点或任意静态网站空间：
 
 ```text
 index.html
@@ -40,7 +40,7 @@ icon.svg
 
 然后用手机浏览器打开网址，即可使用。安卓 Chrome / Edge 或 iPhone Safari 可以添加到手机主屏幕。
 
-## Gitee 数据仓库
+##   数据仓库
 
 建议单独创建一个私有仓库，例如：
 
@@ -56,22 +56,22 @@ data/performance.json
 
 可以先复制 `data-format.json` 的内容作为初始数据。
 
-## APP 中的 Gitee 配置
+## APP 中的   配置
 
 进入：
 
 ```text
-我的 → Gitee 数据同步设置
+我的 →   数据同步设置
 ```
 
 填写：
 
 ```text
-Gitee 用户名/组织：你的 Gitee 用户名
+  用户名/组织：你的   用户名
 仓库名：performance-data
 分支：master 或 main
 数据路径：data/performance.json
-Access Token：你的 Gitee 私人令牌
+Access Token：你的   私人令牌
 ```
 
 ## 数据安全提醒
@@ -100,7 +100,7 @@ Access Token：你的 Gitee 私人令牌
 
 ## 初始化数据格式
 
-新版默认只保留 1 个成员和 1 个业绩类型，记录为空。你可以将 `data-format.json` 的内容复制到 Gitee 私有数据仓库的 `data/performance.json`。
+新版默认只保留 1 个成员和 1 个业绩类型，记录为空。你可以将 `data-format.json` 的内容复制到   私有数据仓库的 `data/performance.json`。
 
 ```json
 {

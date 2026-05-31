@@ -1,7 +1,7 @@
-const STORAGE_KEY = 'bank-performance-gitee-webapp-state-v2';
-const OLD_STORAGE_KEY = 'bank-performance-gitee-webapp-state-v1';
-const CONFIG_KEY = 'bank-performance-gitee-config-v1';
-const API_ROOT = 'https://gitee.com/api/v5';
+const STORAGE_KEY = 'bank-performance- -webapp-state-v2';
+const OLD_STORAGE_KEY = 'bank-performance- -webapp-state-v1';
+const CONFIG_KEY = 'bank-performance- -config-v1';
+const API_ROOT = 'https:// .com/api/v5';
 
 const COLORS = ['#155EEF', '#079455', '#DC6803', '#7A5AF8', '#0E9384', '#D92D20', '#475467', '#2563eb', '#9333ea', '#0891b2'];
 
@@ -230,11 +230,11 @@ function monthTpl() {
 }
 function settingsTpl() {
   return `<section class="card">
-    <div class="section-title"><h2>Gitee 数据同步设置</h2><span class="pill">数据文件 JSON</span></div>
-    <p class="muted">先在 Gitee 建一个私有仓库，再填下面信息。Token 会保存在当前浏览器，请勿把此页面和 Token 发给别人。</p>
+    <div class="section-title"><h2>  数据同步设置</h2><span class="pill">数据文件 JSON</span></div>
+    <p class="muted">先在   建一个私有仓库，再填下面信息。Token 会保存在当前浏览器，请勿把此页面和 Token 发给别人。</p>
     <form id="configForm">
       <div class="grid">
-        <div class="field"><label>Gitee 用户名/组织</label><input name="owner" value="${safeHtml(config.owner)}" placeholder="例如 zhangsan" required></div>
+        <div class="field"><label>  用户名/组织</label><input name="owner" value="${safeHtml(config.owner)}" placeholder="例如 zhangsan" required></div>
         <div class="field"><label>仓库名</label><input name="repo" value="${safeHtml(config.repo)}" placeholder="例如 performance-data" required></div>
       </div>
       <div class="grid">
@@ -245,8 +245,8 @@ function settingsTpl() {
       <button class="primary full" type="submit">保存同步设置</button>
     </form>
     <div class="row wrap" style="margin-top:10px">
-      <button id="pullBtn" class="ghost">从 Gitee 拉取</button>
-      <button id="pushBtn" class="soft">上传/覆盖到 Gitee</button>
+      <button id="pullBtn" class="ghost">从   拉取</button>
+      <button id="pushBtn" class="soft">上传/覆盖到  </button>
     </div>
   </section>
   <section class="card">
@@ -403,9 +403,9 @@ function bindPage() {
   const configForm = document.getElementById('configForm');
   if (configForm) configForm.onsubmit = e => { e.preventDefault(); const fd = new FormData(configForm); config = Object.fromEntries(fd.entries()); saveConfig(); showToast('同步设置已保存'); };
   const pullBtn = document.getElementById('pullBtn');
-  if (pullBtn) pullBtn.onclick = pullFromGitee;
+  if (pullBtn) pullBtn.onclick = pullFrom ;
   const pushBtn = document.getElementById('pushBtn');
-  if (pushBtn) pushBtn.onclick = pushToGitee;
+  if (pushBtn) pushBtn.onclick = pushTo ;
   const exportBtn = document.getElementById('exportBtn');
   if (exportBtn) exportBtn.onclick = () => downloadFile('performance-data.json', JSON.stringify(state, null, 2), 'application/json');
   const exportCsvBtn = document.getElementById('exportCsvBtn');
@@ -415,7 +415,7 @@ function bindPage() {
 }
 function checkConfig() {
   if (!config.owner || !config.repo || !config.branch || !config.path || !config.token) {
-    page = 'settings'; render(); showToast('请先填写 Gitee 同步设置'); return false;
+    page = 'settings'; render(); showToast('请先填写   同步设置'); return false;
   }
   return true;
 }
@@ -443,20 +443,20 @@ async function getRemoteFile() {
   const data = JSON.parse(decodeBase64(json.content || 'e30='));
   return { data, sha: json.sha };
 }
-async function pullFromGitee() {
+async function pullFrom () {
   if (!checkConfig()) return;
   try {
-    showToast('正在从 Gitee 拉取...');
+    showToast('正在从   拉取...');
     const remote = await getRemoteFile();
-    if (!remote) { showToast('Gitee 上还没有数据文件，可先上传'); return; }
+    if (!remote) { showToast('  上还没有数据文件，可先上传'); return; }
     state = normalizeData(remote.data);
-    saveLocal(); render(); showToast('已从 Gitee 同步到本机');
+    saveLocal(); render(); showToast('已从   同步到本机');
   } catch (err) { console.error(err); showToast('拉取失败：请检查 Token、仓库、分支或跨域限制'); }
 }
-async function pushToGitee() {
+async function pushTo () {
   if (!checkConfig()) return;
   try {
-    showToast('正在上传到 Gitee...');
+    showToast('正在上传到  ...');
     let sha = '';
     try { const remote = await getRemoteFile(); sha = remote?.sha || ''; } catch (e) { if (!String(e).includes('404')) throw e; }
     const body = {
@@ -470,7 +470,7 @@ async function pushToGitee() {
     const res = await fetch(url, { method: sha ? 'PUT' : 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
     if (!res.ok) throw new Error(await res.text());
     const json = await res.json(); remoteSha = json.content?.sha || json.sha || '';
-    showToast('已上传到 Gitee');
+    showToast('已上传到  ');
   } catch (err) { console.error(err); showToast('上传失败：请检查仓库权限、路径或 Token'); }
 }
 function normalizeData(d) {
@@ -521,6 +521,6 @@ function exportCsv() {
 }
 
 document.querySelectorAll('.tabbar button').forEach(b => b.onclick = () => { page = b.dataset.page; render(); });
-document.getElementById('syncBtn').onclick = pushToGitee;
+document.getElementById('syncBtn').onclick = pushTo ;
 if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
 render();
