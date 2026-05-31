@@ -456,7 +456,7 @@ async function pullFromGitee() {
 async function pushToGitee() {
   if (!checkConfig()) return;
   try {
-    showToast('正在上传到 Gitee...');
+    showToast('正在上传到 云端...');
     let sha = '';
     try { const remote = await getRemoteFile(); sha = remote?.sha || ''; } catch (e) { if (!String(e).includes('404')) throw e; }
     const body = {
