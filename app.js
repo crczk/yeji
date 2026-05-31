@@ -6,21 +6,17 @@ const API_ROOT = 'https://gitee.com/api/v5';
 const COLORS = ['#155EEF', '#079455', '#DC6803', '#7A5AF8', '#0E9384', '#D92D20', '#475467', '#2563eb', '#9333ea', '#0891b2'];
 
 const defaultData = () => {
-  const memberId = uid();
+  const now = new Date().toISOString();
   return {
     version: 2,
     members: [
-      { id: memberId, name: '本人', role: '客户经理', active: true, createdAt: new Date().toISOString() }
+      { id: 'member_cuizikun', name: '崔子坤', role: '', active: true, createdAt: now }
     ],
     types: [
-      { id: uid(), name: '存款', unit: '万元', color: '#155EEF', active: true, sortOrder: 1 },
-      { id: uid(), name: '理财', unit: '万元', color: '#079455', active: true, sortOrder: 2 },
-      { id: uid(), name: '保险', unit: '件', color: '#DC6803', active: true, sortOrder: 3 },
-      { id: uid(), name: '信用卡', unit: '张', color: '#7A5AF8', active: true, sortOrder: 4 },
-      { id: uid(), name: '手机银行', unit: '户', color: '#0E9384', active: true, sortOrder: 5 },
+      { id: 'type_credit_card', name: '信用卡', unit: '张', color: '#7A5AF8', active: true, sortOrder: 1 }
     ],
     records: [],
-    updatedAt: new Date().toISOString()
+    updatedAt: now
   };
 };
 
@@ -68,7 +64,7 @@ function loadConfig() {
 }
 function ensureDefaultMember() {
   const id = uid();
-  state.members = [{ id, name: '本人', role: '客户经理', active: true, createdAt: new Date().toISOString() }, ...(state.members || [])];
+  state.members = [{ id, name: '崔子坤', role: '', active: true, createdAt: new Date().toISOString() }, ...(state.members || [])];
   saveLocal();
   return id;
 }
@@ -179,7 +175,7 @@ function addTpl() {
       <div class="field"><label>业绩类型</label><select name="typeId" required>${typeSelectOptions()}</select></div>
       <div class="field"><label>上报数量 / 数值</label><input name="value" type="number" inputmode="decimal" step="0.01" min="0" placeholder="例如 50、3、1" required /></div>
       <div class="field"><label>日期</label><input name="date" type="date" value="${todayStr()}" required /></div>
-      <div class="field"><label>备注</label><textarea name="remark" placeholder="例如：客户购买理财。不要填写身份证、银行卡号等敏感信息。"></textarea></div>
+      <div class="field"><label>备注</label><textarea name="remark" placeholder="例如：信用卡上报情况。不要填写身份证、银行卡号等敏感信息。"></textarea></div>
       <button class="primary full" type="submit">保存记录</button>
     </form>
   </section>`;
@@ -399,7 +395,7 @@ function bindPage() {
   };
   const addMemberBtn = document.getElementById('addMemberBtn');
   if (addMemberBtn) addMemberBtn.onclick = () => {
-    const name = prompt('请输入成员姓名，例如：张三'); if (!name) return;
+    const name = prompt('请输入成员姓名，例如：崔子坤'); if (!name) return;
     const role = prompt('请输入岗位/备注，例如：客户经理', '客户经理') || '';
     state.members.push({ id: uid(), name, role, active: true, createdAt: new Date().toISOString() });
     saveLocal(); render();

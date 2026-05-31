@@ -96,3 +96,35 @@ Access Token：你的 Gitee 私人令牌
 - `types`：业绩类型列表。
 - `records`：业绩记录，每条记录关联一个成员和一个业绩类型。
 - `updatedAt`：最后更新时间。
+
+
+## 初始化数据格式
+
+新版默认只保留 1 个成员和 1 个业绩类型，记录为空。你可以将 `data-format.json` 的内容复制到 Gitee 私有数据仓库的 `data/performance.json`。
+
+```json
+{
+  "version": 2,
+  "members": [
+    {
+      "id": "member_cuizikun",
+      "name": "崔子坤",
+      "role": "",
+      "active": true,
+      "createdAt": "2026-05-31T00:00:00.000Z"
+    }
+  ],
+  "types": [
+    {
+      "id": "type_credit_card",
+      "name": "信用卡",
+      "unit": "张",
+      "color": "#7A5AF8",
+      "active": true,
+      "sortOrder": 1
+    }
+  ],
+  "records": [],
+  "updatedAt": "2026-05-31T00:00:00.000Z"
+}
+```
