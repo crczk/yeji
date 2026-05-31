@@ -230,8 +230,8 @@ function monthTpl() {
 }
 function settingsTpl() {
   return `<section class="card">
-    <div class="section-title"><h2>Gitee 数据同步设置</h2><span class="pill">数据文件 JSON</span></div>
-    <p class="muted">先在 Gitee 建一个私有仓库，再填下面信息。Token 会保存在当前浏览器，请勿把此页面和 Token 发给别人。</p>
+    <div class="section-title"><h2>云端 数据同步设置</h2><span class="pill">数据文件 JSON</span></div>
+    <p class="muted">先在 云端 建一个私有仓库，再填下面信息。Token 会保存在当前浏览器，请勿把此页面和 Token 发给别人。</p>
     <form id="configForm">
       <div class="grid">
         <div class="field"><label>Gitee 用户名/组织</label><input name="owner" value="${safeHtml(config.owner)}" placeholder="例如 zhangsan" required></div>
@@ -245,8 +245,8 @@ function settingsTpl() {
       <button class="primary full" type="submit">保存同步设置</button>
     </form>
     <div class="row wrap" style="margin-top:10px">
-      <button id="pullBtn" class="ghost">从 Gitee 拉取</button>
-      <button id="pushBtn" class="soft">上传/覆盖到 Gitee</button>
+      <button id="pullBtn" class="ghost">拉取</button>
+      <button id="pushBtn" class="soft">上传/覆盖</button>
     </div>
   </section>
   <section class="card">
@@ -415,7 +415,7 @@ function bindPage() {
 }
 function checkConfig() {
   if (!config.owner || !config.repo || !config.branch || !config.path || !config.token) {
-    page = 'settings'; render(); showToast('请先填写 Gitee 同步设置'); return false;
+    page = 'settings'; render(); showToast('请先填写 云端 同步设置'); return false;
   }
   return true;
 }
@@ -446,11 +446,11 @@ async function getRemoteFile() {
 async function pullFromGitee() {
   if (!checkConfig()) return;
   try {
-    showToast('正在从 Gitee 拉取...');
+    showToast('正在从 云端 拉取...');
     const remote = await getRemoteFile();
     if (!remote) { showToast('Gitee 上还没有数据文件，可先上传'); return; }
     state = normalizeData(remote.data);
-    saveLocal(); render(); showToast('已从 Gitee 同步到本机');
+    saveLocal(); render(); showToast('已从 云端 同步到本机');
   } catch (err) { console.error(err); showToast('拉取失败：请检查 Token、仓库、分支或跨域限制'); }
 }
 async function pushToGitee() {
@@ -470,7 +470,7 @@ async function pushToGitee() {
     const res = await fetch(url, { method: sha ? 'PUT' : 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
     if (!res.ok) throw new Error(await res.text());
     const json = await res.json(); remoteSha = json.content?.sha || json.sha || '';
-    showToast('已上传到 Gitee');
+    showToast('已上传到 云端');
   } catch (err) { console.error(err); showToast('上传失败：请检查仓库权限、路径或 Token'); }
 }
 function normalizeData(d) {
