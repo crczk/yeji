@@ -28,8 +28,18 @@ let remoteSha = '';
 function uid() {
   return 'id_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 8);
 }
-function todayStr() { return new Date().toISOString().slice(0, 10); }
-function monthStr(d = new Date()) { return d.toISOString().slice(0, 7); }
+function todayStr() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+function monthStr(d = new Date()) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  return `${y}-${m}`;
+}
 function num(n) { return Number(n || 0).toLocaleString('zh-CN', { maximumFractionDigits: 2 }); }
 function typeById(id) { return state.types.find(t => t.id === id); }
 function memberById(id) { return state.members.find(m => m.id === id); }
