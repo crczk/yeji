@@ -244,12 +244,12 @@ function settingsTpl() {
     <p class="muted">先在 云端 建一个私有仓库，再填下面信息。Token 会保存在当前浏览器，请勿把此页面和 Token 发给别人。</p>
     <form id="configForm">
       <div class="grid">
-        <div class="field"><label>Gitee 用户名/组织</label><input name="owner" value="${safeHtml(config.owner)}" placeholder="例如 zhangsan" required></div>
-        <div class="field"><label>仓库名</label><input name="repo" value="${safeHtml(config.repo)}" placeholder="例如 performance-data" required></div>
+        <div class="field"><label>用户名/组织</label><input name="owner" value="${safeHtml(config.owner)}" placeholder="例如 zhangsan" required></div>
+        <div class="field"><label>仓库名</label><input name="repo" value="${safeHtml(config.repo)}" placeholder="例如 private" required></div>
       </div>
       <div class="grid">
         <div class="field"><label>分支</label><input name="branch" value="${safeHtml(config.branch || 'master')}" required></div>
-        <div class="field"><label>数据路径</label><input name="path" value="${safeHtml(config.path || 'data/performance.json')}" required></div>
+        <div class="field"><label>数据路径</label><input name="path" value="${safeHtml(config.path || 'data/private.json')}" required></div>
       </div>
       <div class="field"><label>私人令牌 Access Token</label><input name="token" type="password" value="${safeHtml(config.token)}" placeholder="建议只给仓库内容读写权限" required></div>
       <button class="primary full" type="submit">保存同步设置</button>
